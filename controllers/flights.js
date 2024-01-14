@@ -13,6 +13,24 @@ function index(req,res){
   })
 }
 
+function newFlight(req, res){
+ res.render('flights/new', {
+  title: "Add Flight",
+ })
+}
+
+function create(req,res){
+  Flight.create(req.body)
+  .then(flight => {
+    res.redirect('/flights')
+  })
+  .catch(err => {
+    res.redirect('/flights/new')
+  })
+}
+
 export {
-  index
+  index,
+  newFlight as new,
+  create,
 }

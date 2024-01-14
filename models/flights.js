@@ -3,13 +3,15 @@ import mongoose from "mongoose"
 const mySchema = mongoose.Schema
 
 const flightsSchema = new mySchema ({
-  airline: String,
-  airport: String,
+  airline: [String],
+  airport: [String],
   flightNo: Number,
   departs: Date,
+}, {
+  timestamps: true
 })
 
-const Flight = mongoose.model('Flights', flightsSchema)
+const Flight = mongoose.model('Flight', flightsSchema)
 
 export {
   Flight
