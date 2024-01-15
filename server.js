@@ -27,6 +27,8 @@ app.use(
     path.join(path.dirname(fileURLToPath(import.meta.url)), 'public')
   )
 )
+app.use(methodOverride('_method'))
+
 
 // mount imported routes
 app.use('/', indexRouter)
