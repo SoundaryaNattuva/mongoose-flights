@@ -18,17 +18,33 @@
 
 <h2>Tickets</h2>
 <table>
-    <tr>
-      <th><u>Seat</u></th>
-      <th><u>Price</u></th>
-    </tr>
-    <% flight.ticket.forEach(ticket => { %>
+  <tr>
+    <th><u>Seat</u></th>
+    <th><u>Price</u></th>
+  </tr>
+  <% flight.ticket.forEach(ticket => { %>
     <tr> 
-      <th><%= ticket.seat %></th>
-      <th>$ <%= ticket.price %></th>
+      <td><%= ticket.seat %></td>
+      <td>$<%= ticket.price %></td>
     </tr>
-
-<% })  %>
+  <% })  %>
 </table>
+<br>
+
+<form class="add-ticket" action="/flights/<%= flight._id %>/tickets" method="POST">
+<label for="seat-number">Seat Number:</label>
+<input 
+  type="text" 
+  name="seat" 
+  id="seat-number" 
+  value="A1-F99"
+  required pattern ="[A-F][1-9][1-9]\D?" 
+>
+
+<label for="seat-price">Seat Price:</label>
+<input type="text" name="price" id="seat-price" value="" >
+<button type="submit"> Add Ticket </button>
+</form>
+
 </main>
 <%- include('../partials/footer') %>
