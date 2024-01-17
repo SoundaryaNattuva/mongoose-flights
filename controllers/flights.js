@@ -42,9 +42,53 @@ function deleteFlight(req, res){
 }
 
 
+function edit(req,res){
+  console.log("edit is working 🔥 🔥 🔥 !!")
+  Flight.findById(req.params.flightId)
+  .then(flight => {
+    res.redirect(`flights/edit`,{
+      flight:flight,
+      title: "Edit Flight"
+    })
+  })
+  .catch(err => {
+    console.log(err)
+    res.redirect("/flights")
+  })
+}
+
+function update(req,res){
+  Flight.findByIdAndUpdate(req.params.flightId, req.body, {new: true})
+  .then(flight => {
+    res.redirect(`/flights/${flight._id}`)
+  })
+  .catch(err => {
+    console.log(err)
+    res.redirect("/flights")
+  })
+}
+
+function show(req,res){
+  Flight.findById(req.params.flightId)
+  .then(flight => {
+    res.render('flights/show', {
+      flight,
+      title: 'Flight Details'
+    })
+  })
+  .catch(err => {
+    console.log(err)
+    res.redirect('/')
+  })
+}
+
+
 export {
   index,
   newFlight as new,
   create,
   deleteFlight as delete,
+  edit,
+  update,
+  show
 }

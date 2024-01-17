@@ -27,9 +27,17 @@
           >
             <button type="submit">X</button>
           </form>
+          </td>
+          <td>
+            <form 
+              action="/flights/<%= flight._id %>?_method=PUT"
+              method="POST"
+            >
+              <button type="submit">✏️</button>
+            </form>
+            </td>
         </tr>
       <% }) %>
-      <%# Close the forEach using EJS here %>
     </tbody>
   </table>
 </main>
