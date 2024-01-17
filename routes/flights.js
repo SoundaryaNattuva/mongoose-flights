@@ -9,7 +9,7 @@ router.get('/', flightsCtrl.index)
 router.get('/new', flightsCtrl.new)
 // GET localhost:3000/flights/:flightId
 router.get('/:flightId', flightsCtrl.show)
-// GET localhost:3000/flights/:flightId
+// GET localhost:3000/flights/:flightId/edit
 router.get('/:flightId/edit', flightsCtrl.edit)
 
 

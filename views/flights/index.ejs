@@ -25,17 +25,14 @@
             action="/flights/<%= flight._id %>?_method=DELETE"
             method="POST"
           >
-            <button type="submit">X</button>
+            <button type="delete">X</button>
           </form>
           </td>
           <td>
-            <form 
-              action="/flights/<%= flight._id %>?_method=PUT"
-              method="POST"
-            >
-              <button type="submit">✏️</button>
-            </form>
-            </td>
+            <a href="/flights/<%= flight._id %>/">
+              <button type="edit">Details</button>
+            </a>
+          </td>
         </tr>
       <% }) %>
     </tbody>

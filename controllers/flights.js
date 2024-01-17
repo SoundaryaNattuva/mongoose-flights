@@ -41,33 +41,6 @@ function deleteFlight(req, res){
   })
 }
 
-
-function edit(req,res){
-  console.log("edit is working 🔥 🔥 🔥 !!")
-  Flight.findById(req.params.flightId)
-  .then(flight => {
-    res.redirect(`flights/edit`,{
-      flight:flight,
-      title: "Edit Flight"
-    })
-  })
-  .catch(err => {
-    console.log(err)
-    res.redirect("/flights")
-  })
-}
-
-function update(req,res){
-  Flight.findByIdAndUpdate(req.params.flightId, req.body, {new: true})
-  .then(flight => {
-    res.redirect(`/flights/${flight._id}`)
-  })
-  .catch(err => {
-    console.log(err)
-    res.redirect("/flights")
-  })
-}
-
 function show(req,res){
   Flight.findById(req.params.flightId)
   .then(flight => {
@@ -81,6 +54,36 @@ function show(req,res){
     res.redirect('/')
   })
 }
+
+
+function edit(req,res){
+  Flight.findById(req.params.flightId)
+  .then(flight => {
+    const flightDefaultDate = flight.departs.toISOString().slice(0,16)
+    res.render(`flights/edit`,{
+      flight:flight,
+      flightDefaultDate:flightDefaultDate,
+      title: "Edit Flight"
+    })
+  })
+  .catch(err => {
+    console.log(err)
+    res.redirect("/flights")
+  })
+}
+
+function update(req,res){
+  Flight.findByIdAndUpdate(req.params.flightId, req.body, {new: true})
+  .then(flight => {
+    res.redirect(`/flights/`)
+  })
+  .catch(err => {
+    console.log(err)
+    res.redirect("/flights")
+  })
+}
+
+
 
 
 export {
