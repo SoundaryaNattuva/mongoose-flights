@@ -9,12 +9,28 @@
     <div><span style="font-weight: bold; font-size: 24px";> Airport: </span><%= flight.airport %> </div>
     <div><span style="font-weight: bold; font-size: 24px";> Flight No.:  </span><%= flight.flightNo %> </div>
     <div><span style="font-weight: bold; font-size: 24px";> Departure:  </span> <%= new Date(flight.departs).toLocaleString("en-US") %> </div>
+    <div><span style="font-weight: bold; font-size: 24px";> Meals:  </span> 
+    <ul>
+      <% flight.meals.forEach(eachMeal => { %> 
+      <li> <%= eachMeal.name %> </li>
+      <% }) %>
+  </ul>
+    </div>
   </section>
-<br>
+  <form id="add-meal" action="/flights/<%= flight._id %>/meals" method="POST">
+    <select name="mealId">
+      <% meals.forEach(meal => { %>
+        <option value="<%= meal._id %>"><%= meal.name %></option>
+      <% }) %>
+    </select>
+    <button type="submit">Add Meal</button>
+  </form>
+
+  <br>
 <a href="/flights/<%=flight._id%>/edit">
-  <button type="edit">Edit Flight</button>
+  <button type="">Edit Flight</button>
 </a>
-<br>
+
 
 <h2>Tickets</h2>
 <table>
@@ -31,6 +47,7 @@
 </table>
 <br>
 
+<section>
 <form class="add-ticket" action="/flights/<%= flight._id %>/tickets" method="POST">
 <label for="seat-number">Seat Number:</label>
 <input 
@@ -40,11 +57,13 @@
   value="A1-F99"
   required pattern ="[A-F][1-9][1-9]\D?" 
 >
-
+<br>
 <label for="seat-price">Seat Price:</label>
 <input type="text" name="price" id="seat-price" value="" >
+<br>
 <button type="submit"> Add Ticket </button>
 </form>
+</section>
 
 </main>
 <%- include('../partials/footer') %>
